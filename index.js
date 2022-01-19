@@ -788,3 +788,595 @@ convertFirstCharToUpper('parikshit')
 - padStart & padEnd
 - Template literal :`The day has ${24*60*60} seconds`
  */
+
+/*
+    BOM (browser object model)
+    DOM (Document object model)
+    - Accessing/Getting/Selecting DOM nodes
+    > byID: document.getElementById
+    > byClass: document.getElementsByClassName
+    > byTagName: document.getElementsByTagName
+    > byQuery: document.querySelector(gives single element selected by query)
+    || document.querySelectorAll(gives all
+ elements selected by query)
+ let t = null;
+ console.log(t)
+Appending a DOM node to gridParent Div
+let newDiv = document.createElement('div')
+newDiv
+newDiv.innerText = 'Item 4'
+'Item 4'
+newDiv
+newDiv.getAttribute('class')
+newDiv.setAttribute('class','gridChild')
+<div class=​"gridChild">​Item 4​</div>​
+document.getElementsByClassName('gridParent')
+HTMLCollection [div.gridparent]
+document.getElementsByClassName('gridParent')[0]
+let parentDiv = document.getElementsByClassName('gridParent')[0]
+parentDiv.appendChild(newDiv)
+document.getElementsByClassName('gridParent')
+document.getElementsByClassName('gridParent')[0]
+<div class=​"gridParent">​…​</div>​ grid 
+function renderGridNodes(numberOfNodesToRender){
+}
+renderGridNodes(9)
+ */
+
+function checkMe() {
+    const valueOfInput = document.getElementsByTagName("input")[0].value;
+    if (valueOfInput === "") {
+      document.getElementById("heading").innerText = "Error";
+      document.getElementById("heading").style.color = "red";
+      return;
+    }
+    const numericValue = Number(valueOfInput);
+    if (numericValue % 2 === 0) {
+      document.getElementById("heading").innerText = "Yes";
+      document.getElementById("heading").style.color = "green";
+    } else {
+      document.getElementById("heading").innerText = "No";
+      document.getElementById("heading").style.color = "red";
+    }
+  }
+  
+  /*
+      Event listeners in DOM
+      // Click listener    
+  document.getElementsByClassName('gridParent')[0].addEventListener('click', _ =>  {
+    console.log("Div clicked")
+  })
+  */
+  
+  /*
+   DOM events
+  // Mouse Listners
+  // KeyBoard events
+  // Touch events
+  // Window events
+  document.getElementsByClassName('gridParent')[0].addEventListener('click', () => {
+   document.getElementsByClassName('gridParent')[0].innerText = "I was clicked"   
+  }) // Changing the inner text of a div
+  */
+  
+  // const myButton = document.getElementById('button');
+  // const divContainer = document.getElementsByClassName('gridParent')[0];
+  
+  // let mouseEnabled = false;
+  // const flipSwitch = () => mouseEnabled = !mouseEnabled
+  
+  // //code 1
+  
+  // const mouseEnterHandler = () => { console.log('enter');divContainer.innerText = 'Mouse on me'}
+  // const mouseOutHandler = () => { console.log('left');divContainer.innerText = 'Mouse not on me!'};
+  
+  // myButton.addEventListener('click', () => {
+  //     console.log("Running")
+  //     const heading = document.getElementById('heading')
+  //     if(!mouseEnabled)//
+  //         {
+  //         myButton.innerText = "Enable Mouse"
+  //         flipSwitch();
+  //         heading.innerText = heading.innerText.replace('Disabled','Enabled')
+  //         divContainer.addEventListener('mouseenter', mouseEnterHandler);
+  //         divContainer.addEventListener('mouseout', mouseOutHandler)
+  //         }
+  //     else
+  //        {
+  //            myButton.innerText = "Disabled Mouse"
+  //            flipSwitch();
+  //            heading.innerText = heading.innerText.replace('Enabled', 'Disabled')
+  //            divContainer.removeEventListener('mouseenter', mouseEnterHandler)
+  //            divContainer.removeEventListener('mouseout', mouseOutHandler)
+  //         }
+  // });
+  
+  /*
+  myButton.addEventListener('click', () => {        
+      myButton.innerText = switchButton?"Disable Mouse":"Enable Mouse";                
+      flipSwitch();       
+  });
+  */
+  
+  const gridParent = document.getElementsByClassName("gridParent")[0];
+  const outerMostDiv = document.getElementsByClassName("gridChild1")[0];
+  const middleDiv = document.getElementsByClassName("gridChild2")[0];
+  const innerMostDiv = document.getElementsByClassName("gridChild3")[0];
+  const bodyOfHTML = document.getElementsByTagName("body")[0];
+  
+  // bodyOfHTML.addEventListener('click', (event) => {
+  //     console.log("Click on body");
+  //     console.log(event.target, event.currentTarget);
+  // })
+  
+  // outerMostDiv.addEventListener('click', (event) => {
+  //     // console.log(event.target, event.currentTarget);
+  //     console.log("Click on outerMostDiv");
+  // })
+  
+  // outerMostDiv.addEventListener('mouseover', (event) => {
+  //     // console.log(event.target, event.currentTarget);
+  //     console.log("Mouse on outerDiv");
+  // })
+  
+  // middleDiv.addEventListener('mouseover', () => {
+  //     // console.log(event.target, event.currentTarget);
+  //     console.log("Mouse on middleDiv");
+  // })
+  
+  // middleDiv.addEventListener('click', (event) => {
+  //     // console.log(event.target, event.currentTarget);
+  //     console.log("Click on middleDiv");
+  // })
+  
+  // innerMostDiv.addEventListener('click', (event) => {
+  //         event.stopPropagation()
+  //     console.log("Click on innerMostDiv");
+  // })
+  
+  gridParent.addEventListener("click", (event) => {
+    const heading = document.getElementById("heading");
+    if (event.target === event.currentTarget) {
+      heading.innerText = `Please click only on inner elements!`;
+      return;
+    }
+    const targetText = event.target.innerText;
+    heading.innerText = `Click on: ${targetText}`;
+  });
+  
+  // Principle of bubbling
+  
+  //Prototype
+  
+  let animal = {};
+  animal.name = "Lion";
+  animal.power = 100;
+  
+  animal.eat = function (foodQuantity) {
+    console.log("Animal eats");
+    this.power += foodQuantity;
+  };
+  animal.run = function (time) {
+    console.log("Animal runs");
+    this.power -= time;
+  };
+  animal.rests = function (time) {
+    console.log("Animal is resting");
+    this.power += time;
+  };
+  
+  // Functional instantiation
+  function Animal(name, power) {
+    let animal = {};
+  
+    animal.name = name;
+    animal.power = power;
+  
+    animal.eat = function (foodQuantity) {
+      console.log("Animal eats");
+      this.power += foodQuantity;
+    };
+    animal.run = function (time) {
+      console.log("Animal runs");
+      this.power -= time;
+    };
+    animal.rests = function (time) {
+      console.log("Animal is resting");
+      this.power += time;
+    };
+  
+    return animal;
+  }
+  
+  let lion = Animal("Liony", 100);
+  let dog = Animal("Doggy", 20);
+  
+  // Functional instantiation with shared methods
+  
+  const sharedAnimalMethods = {
+    eat: function (foodQuantity) {
+      console.log("Animal eats");
+      this.power += foodQuantity;
+    },
+    run: function (time) {
+      console.log("Animal runs");
+      this.power -= time;
+    },
+    rests: function (time) {
+      console.log("Animal is resting");
+      this.power += time;
+    },
+  };
+  
+  function AnimalI(name, power){
+    let animal = {};
+    animal.name = name;
+    animal.power = power;
+  
+    animal.eat =  sharedAnimalMethods.eat;
+    animal.run =  sharedAnimalMethods.run;
+    animal.rests = sharedAnimalMethods.rests;
+  
+    return animal;
+  }
+  let lionI = AnimalI("Liony", 100);
+  let dogI  = AnimalI("Doggy", 20);
+  
+  // Object.create
+  // Creates an object, which delegates to another object on failed lookups
+  
+  const parent = {
+      name: "Abc",
+      age: 49,
+      nationality: "Indian"
+  }
+  
+  const child = Object.create(parent); // {}
+  
+  child.name =  "Def";
+  child.age=  9;
+  
+  child.nationality
+  
+  
+  const sharedAnimalMethodsI = {
+    eat: function (foodQuantity) {
+      console.log("Animal eats");
+      this.power += foodQuantity;
+    },
+    run: function (time) {
+      console.log("Animal runs");
+      this.power -= time;
+    },
+    rests: function (time) {
+      console.log("Animal is resting");
+      this.power += time;
+    },
+  };
+  
+  function AnimalII(name, power){
+    let animal = Object.create(sharedAnimalMethodsI);
+    animal.name = name;
+    animal.power = power;
+    return animal;
+  }
+  
+  let lionII = AnimalII("Liony", 100);
+  let dogII  = AnimalII("Doggy", 20);
+  
+  // Prototype
+  // Functional property referencing an object is protype
+  
+  
+  // Prototypal instantiation
+  
+  function AnimalIProto(name, power){
+    let animal = Object.create(AnimalIProto.prototype);
+    animal.name = name;
+    animal.power = power;
+    return animal;
+  }
+  
+  AnimalIProto.prototype.eat= function (foodQuantity) {
+    console.log("Animal eats");
+    this.power += foodQuantity;
+  };
+  
+  AnimalIProto.prototype.run= function (time) {
+    console.log("Animal runs");
+    this.power -= time;
+  };
+  
+  AnimalIProto.prototype.rests =  function (time) {
+    console.log("Animal is resting");
+    this.power += time;
+  };
+  
+  let lionIProto = AnimalIProto("Liony", 100);
+  let dogIProto  = AnimalIProto("Doggy", 20);
+  
+  lionIProto.roar = function () {
+    console.log("lion roars")
+  }
+  
+  dogIProto.bark = function () {
+    console.log("dog barks")
+  }
+  
+  lionIProto.roar()
+  lionIProto.eat()
+  
+  
+  
+  // Pseudo-classical Instantiation
+  function Animal(name, energy){
+    // this = Object.create(Animal.prototype)
+    this.name = name;
+    this.energy = energy;
+    // return this;
+  }
+  
+  Animal.prototype.eat= function (foodQuantity) { 
+    console.log("Animal eats");
+    this.power += foodQuantity;
+  };
+  
+  Animal.prototype.run= function (time) {
+    console.log("Animal runs");
+    this.power -= time;
+  };
+  
+  Animal.prototype.rests =  function (time) {
+    console.log("Animal is resting");
+    this.power += time;
+  };
+  
+  let lion = new Animal('Lion', 100);
+  lion.eat(100);
+  
+  // class
+  
+  class AnimalC{ //  Syntactical sugar
+    constructor(name, energy){
+      this.name = name;
+      this.energy = energy;
+    }
+  
+  eat(foodQuantity) { 
+    console.log("Animal eats");
+    this.power += foodQuantity;
+    }
+  
+  run(time) {
+    console.log("Animal runs");
+    this.power -= time;
+    }
+  
+  rests(time) {
+    console.log("Animal is resting");
+    this.power += time;
+    }
+  }
+  
+  let lionC = new AnimalC("Lionny", 100);
+  
+  
+  // Array methods
+  
+  const myArr = []; //  Syntactical sugar
+  const myArr2 = new Array();
+  myArr.forEach(x => console.log(x))
+  myArr.map(x => console.log(x))
+  
+  
+  class AnimalC{ //  Syntactical sugar
+    constructor(name, energy){
+      this.name = name;
+      this.energy = energy;
+    }
+  
+  eat(foodQuantity) { 
+    console.log("Animal eats");
+    this.power += foodQuantity;
+    }
+  
+  run(time) {
+    console.log("Animal runs");
+    this.power -= time;
+    }
+  
+  rests(time) {
+    console.log("Animal is resting");
+    this.power += time;
+  }
+  
+  static findTopAnimals(animalsArr){
+    return animalsArr.sort( (lion1,lion2) => 
+      (lion2.power - lion1.power)).slice(0,3)
+  }
+  
+  static sayHi(){
+    console.log("I am an Animal class")
+  }
+    
+  }
+  
+  // function findTopAnimals(animalsArr){
+  //   return animalsArr.sort( (lion1,lion2) => (lion2.power - lion1.power)).slice(0,3)
+  // }
+  
+  // let lionC = new AnimalC("Lionny", 100);
+  // let lionD = new AnimalC("Lionny2", 90);
+  // let lionE = new AnimalC("Lionny3", 120);
+  // let lionF = new AnimalC("Lionny4", 60);
+  // AnimalC.findTopAnimals([lionC, lionD, lionE, lionF])
+  
+  
+  // Static using functions
+  
+  
+  function Animal(name, energy){
+    // this = Object.create(Animal.prototype)
+    this.name = name;
+    this.energy = energy;
+    // return this;
+  }
+  
+  Animal.prototype.eat= function (foodQuantity) { 
+    console.log("Animal eats");
+    this.power += foodQuantity;
+  };
+  
+  Animal.prototype.run= function (time) {
+    console.log("Animal runs");
+    this.power -= time;
+  };
+  
+  Animal.prototype.rests =  function (time) {
+    console.log("Animal is resting");
+    this.power += time;
+  };
+  
+  let lionD = new Animal("Lionny2", 90);
+  let lionE = new Animal("Lionny3", 120);
+  let lionF = new Animal("Lionny4", 60);
+  
+  Animal.findTopAnimals = function(){
+    // ...s
+  }
+  Animal.findTopAnimals([lionC, lionD, lionE, lionF]);
+  //
+  
+  
+  1. `
+  The prototype object will have a constructor property 
+  which points to the original function or the
+  class that the instance was created from
+  `
+  2. `Object.getPrototypeOf(lionC) === Animal.prototype;`
+  
+  // __proto not to be used anymore, older/deprecated way of getting prototype
+  
+  
+  // property1
+  // Distinguish, whether the property lies on prototype or the instance itself
+  
+  //Object.keys()// actual keys not on prototype
+  //Object.getPrototypeOf()// keys only on the prototype
+  
+  // lionC.hasOwnProperty('nameOfProperty')
+  // Prototype chain
+  
+  //checking if it's an instacne of class
+  // class AnimalC{
+  
+  // }
+  // lionC 
+  // Object.getPrototypeOf(lionC) === Object.getPrototypeOf(AnimalC)
+  // lionC instanceOf AnimalC
+  
+  function Animal(name, energy){  
+    // this = Object.create(Animal.prototype)
+    this.name = name;
+    this.energy = energy
+    //retur this
+  }
+  
+  const lionD = Animal("Abc", 100);
+  lionD.name
+  
+  function Animal(name, energy){    
+    if(this instanceof Animal === false){
+        console.log("Did you miss writing new?")
+        return;
+    }
+    this.name = name;
+    this.energy = energy
+  }
+  
+  const lionD = Animal("Abc", 100);
+  
+  function Animal(name, energy){    
+    if(this instanceof Animal === false){
+        return new Animal(name, energy);
+    }
+    this.name = name;
+    this.energy = energy
+  }
+  const lionD = Animal("Abc", 100);
+  
+  // Creating your own Object.create
+  //  child = Object.create(parent)
+  
+  Object.create = function(parentObj){
+    function myFn(){};
+    myFn.prototype = parentObj;
+    return new myFn()  
+  }
+  
+  // Prototype chain & JS inheritance
+  
+  function Dog(name, energy, breed){
+    this.name = name;
+    this.energy = energy;
+    this.breed = breed;  
+  }
+  
+  
+  
+  Dog.prototype.eat = function(){}
+  Dog.prototype.rests = function(){}
+  Dog.prototype.sleep = function(){}
+  
+  Dog.prototype.bark = function(){}
+  
+  const tommy = new Dog();
+  tommy.eat();
+  tommy.bark();
+  
+  function Cat(name, energy, hairColor){
+    this.name = name;
+    this.energy = energy;
+    this.hairColor = hairColor;      
+  }
+  Cat.prototype.eat = function(){}
+  Cat.prototype.rests = function(){}
+  Cat.prototype.sleep = function(){}
+  
+  Cat.prototype.meow = function(){}
+  
+  function Animal(name, energy){  
+    this.name = name;
+    this.energy = energy;  
+  }
+  
+  Animal.prototype.eat= function (foodQuantity) { 
+    console.log("Animal eats");
+    this.power += foodQuantity;
+  };
+  
+  Animal.prototype.run= function (time) {
+    console.log("Animal runs");
+    this.power -= time;
+  };
+  
+  Animal.prototype.rests =  function (time) {
+    console.log("Animal is resting");
+    this.power += time;
+  };
+  
+  function Dog(name, energy, breed){
+    // this = Object.create(Dog.prototype) // dog-this {} t  
+    Animal.call(this, name, energy);  
+    this.breed = breed;    
+    // return this (dog-this)
+  }
+  Dog.prototype = Object.create(Animal.prototype); // {}
+  Dog.prototype.constructor = Dog;
+  
+  Dog.prototype.bark = function() {
+    console.log("Barking")
+  };
+  
+  const tommy = new Dog('tommy', 10, 'Labradoodle')
+  tommy.eat();
